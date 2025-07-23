@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import api from "@/api"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
-import * as yup from 'yup'
-import { useState } from "react"
+import api from "@/api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { useState } from "react";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is required").email("Invalid email format"),
@@ -38,16 +38,14 @@ const LoginPage = () => {
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      
+      // Set the cookie manually
+      document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+      document.cookie = `user=${encodeURIComponent(JSON.stringify(user))}; path=/; max-age=${60 * 60 * 24}; SameSite=Lax`;
 
       alert('Login successful');
 
-      if (user.role === 'seller') {
-        router.push('/Books');
-      } else if (user.role === 'buyer') {
-        router.push('/Browse');
-      } else {
-        router.push('/');
-      }
+      router.push('/books');
 
     } catch (err: any) {
       console.error(err);
@@ -58,47 +56,66 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 px-4">
-      <div className="w-full max-w-md bg-gray-800 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-2xl font-bold text-white text-center mb-6">Welcome Back</h2>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
+      style={{
+        backgroundImage: "url(/images/img6.jpg)",
+        backgroundColor: "#e6d3c4"
+      }}
+    >
+      <div
+        className="backdrop-blur-md bg-white/20 shadow-xl rounded-2xl px-8 py-10 w-full max-w-md"
+        style={{
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)"
+        }}
+      >
+        <h2 className="text-center text-3xl font-bold text-[#5c4433] mb-6">Login to Your Account</h2>
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email */}
+
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+            <label className="block text-sm font-medium text-[#5c4433] mb-1">Email</label>
             <input
               type="email"
-              {...register('email')}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              {...register("email")}
+              className="w-full px-4 py-2 rounded-lg bg-white/80 text-[#5c4433] focus:outline-none focus:ring-2 focus:ring-[#8b6e5c]"
             />
             <p className="text-red-500 text-sm mt-1">{errors.email?.message}</p>
           </div>
 
-          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Password</label>
+            <label className="block text-sm font-medium text-[#5c4433] mb-1">Password</label>
             <input
               type="password"
-              {...register('password')}
-              className="w-full px-4 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              {...register("password")}
+              className="w-full px-4 py-2 rounded-lg bg-white/80 text-[#5c4433] focus:outline-none focus:ring-2 focus:ring-[#8b6e5c]"
             />
             <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition duration-200"
             disabled={loading}
+            className="w-full py-2 rounded-full text-white font-semibold transition duration-300"
+            style={{
+              backgroundColor: '#8b6e5c',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#5c4433')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#8b6e5c')}
           >
-            {loading ? 'Logging in...' : 'Submit'}
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        <p className="text-center text-gray-400 text-sm mt-4">
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-400 hover:underline">
-            Register
-          </a>
+        <p className="text-center text-[#5c4433] text-sm mt-4">
+          Don't have an account?{" "}
+          <a href="/registration" className="underline hover:text-[#3c2e23] transition">Register</a>
+        </p>
+
+        <p className="text-center text-[#5c4433] text-sm mt-2">
+          <a href="/" className="hover:underline">← Go to Home</a>
         </p>
       </div>
     </div>

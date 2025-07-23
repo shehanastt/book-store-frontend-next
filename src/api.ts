@@ -3,7 +3,7 @@ import axios from "axios";
 const api = axios.create({
     // baseURL: 'https://book-store-backend-cytz.onrender.com',
     baseURL: "http://localhost:5000",
-    timeout: 5000
+    // timeout: 5000
 });
 
 // api.interceptors.request.use(config => {
