@@ -110,8 +110,10 @@ const LoginPage = () => {
         </form>
 
         <p className="text-center text-[#5c4433] text-sm mt-4">
-          Don't have an account?{" "}
-          <a href="/registration" className="underline hover:text-[#3c2e23] transition">Register</a>
+        Don&apos;t have an account?{" "}
+        <a href="/registration" className="underline hover:text-[#3c2e23] transition">
+            Register
+        </a>
         </p>
 
         <p className="text-center text-[#5c4433] text-sm mt-2">
