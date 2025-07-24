@@ -175,20 +175,17 @@ const AddBook = ()=> {
             </div>
 
             {preview && (
-            <div className="mt-4">
-                <p className="text-sm text-[#6e5842] mb-1">Image Preview:</p>
+            <div className="relative w-full h-40 mt-4 border border-[#cbbfa7] rounded-md shadow overflow-hidden">
+                <p className="text-sm text-[#6e5842] mb-1 absolute top-0 left-0 bg-white/70 px-2 py-1 rounded-br-md z-10">
+                Image Preview:
+                </p>
                 <Image
-                    src={preview}
-                    alt="Preview"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-md"
-                />
-                {/* <img
                 src={preview}
                 alt="Preview"
-                className="h-40 object-cover rounded-md border border-[#cbbfa7] shadow"
-                /> */}
+                fill
+                className="object-cover rounded-md"
+                unoptimized
+                />
             </div>
             )}
 
