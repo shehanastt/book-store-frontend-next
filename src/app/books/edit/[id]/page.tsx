@@ -13,10 +13,7 @@ const schema = yup.object().shape({
   author: yup.string().required(),
   price: yup.number().required(),
   description: yup.string().required(),
-  image: yup.mixed().test("fileRequired", "Image is required", (value) => {
-        return value instanceof FileList && value.length > 0;
-      })
-      .required("Image is required") as yup.Schema<FileList>
+  image: yup.mixed().notRequired() as yup.Schema<FileList>
 })
 
 export interface BookFormValues {
@@ -56,6 +53,7 @@ const EditBook = () => {
   }, [id, reset]);
 
   const onSubmit = async (data: BookFormValues) => {
+    console.log(data,"data")
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("author", data.author);
@@ -160,6 +158,7 @@ const EditBook = () => {
           accept="image/*"
           {...register("image")}
           onChange={(e) => {
+            register("image").onChange(e);
             const file = e.target.files?.[0];
             if (file) {
               setImagePreview(URL.createObjectURL(file));
