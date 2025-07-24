@@ -117,7 +117,6 @@ const LoginPage = () => {
         </p>
 
         <p className="text-center text-[#5c4433] text-sm mt-2">
-          {/* <a href="/" className="hover:underline">← Go to Home</a> */}
           <Link href={"/"}className="hover:underline">← Go to Home</Link>
         </p>
       </div>
