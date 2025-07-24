@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  useTheme,
 } from "@mui/material";
 
 type ConfirmDialogProps = {
@@ -27,7 +26,6 @@ const ConfirmDialog = ({
   confirmText = "Yes",
   cancelText = "Cancel",
 }: ConfirmDialogProps) => {
-  const theme = useTheme();
 
   return (
     <Dialog
@@ -79,7 +77,7 @@ const ConfirmDialog = ({
           onClick={onConfirm}
           variant="contained"
           sx={{
-            backgroundColor: "#8e735b", // pastel brown
+            backgroundColor: "#8e735b",
             color: "#fff",
             ":hover": {
               backgroundColor: "#7c6451",

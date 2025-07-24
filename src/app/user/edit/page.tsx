@@ -19,7 +19,6 @@ const EditProfile = () => {
   const [hasExistingImage, setHasExistingImage] = useState(false);
   const router = useRouter();
 
-  // Dynamically create validation schema based on existing image state
   const validationSchema = useMemo(() => {
     return yup.object().shape({
       name: yup.string().required("Name is required"),
@@ -61,7 +60,7 @@ const EditProfile = () => {
           if (userData.image) {
             const imageUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${userData.image.replace(/\\/g, "/")}`;
             setPreview(imageUrl);
-            setHasExistingImage(true); // Image exists, so we won't require new one
+            setHasExistingImage(true); 
           }
         })
         .catch((err) => {
@@ -93,7 +92,7 @@ const EditProfile = () => {
     const file = e.target.files?.[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
-      setHasExistingImage(false); // Since user chose new image
+      setHasExistingImage(false); 
     }
   };
 

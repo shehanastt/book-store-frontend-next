@@ -3,16 +3,6 @@
 import AutoSlider from "@/components/AutoSlider"
 
 const HomePage = () => {
-
-    const categories = [
-      'Fiction',
-      'Non-fiction',
-      'Children',
-      'Romance',
-      'Thriller',
-      'Academic',
-      ];
-
     return(
         <div>
             <AutoSlider/>

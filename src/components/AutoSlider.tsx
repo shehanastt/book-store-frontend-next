@@ -1,6 +1,6 @@
 'use client';
 
-import { Card } from '@mui/material';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const banners = [
@@ -30,7 +30,7 @@ const AutoSlider = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % banners.length);
-    }, 4000); // every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -44,11 +44,13 @@ const AutoSlider = () => {
             index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
         >
-          <img
-            src={banner.src}
-            alt={banner.title}
-            className="w-full h-full object-cover"
-          />
+          <Image
+          src={banner.src}
+          alt={banner.title}
+          fill
+          className="object-cover"
+          priority={index === 0}
+        />
           <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-4">
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-2 drop-shadow">
               {banner.title}

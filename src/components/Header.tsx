@@ -17,8 +17,6 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
 
-
-  // Check auth status on mount and when the dialog is closed
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user")
@@ -41,7 +39,7 @@ const Header = () => {
     document.cookie = "token=; path=/; max-age=0";
 
     console.log("logout success");
-    setIsLoggedIn(false); // Update state
+    setIsLoggedIn(false);
     setOpen(false);
     router.push("/");
   };

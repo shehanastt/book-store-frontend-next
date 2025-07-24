@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useState } from "react";
+import Link from "next/link";
 
 const schema = yup.object().shape({
   email: yup.string().required("Email is required").email("Invalid email format"),
@@ -38,16 +39,15 @@ const LoginPage = () => {
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      
-      // Set the cookie manually
+
       document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
       document.cookie = `user=${encodeURIComponent(JSON.stringify(user))}; path=/; max-age=${60 * 60 * 24}; SameSite=Lax`;
 
       alert('Login successful');
 
       router.push('/books');
-
-    } catch (err: any) {
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) { 
       console.error(err);
       alert(err?.response?.data?.message || 'Login failed');
     } finally {
@@ -110,12 +110,13 @@ const LoginPage = () => {
         </form>
 
         <p className="text-center text-[#5c4433] text-sm mt-4">
-          Don't have an account?{" "}
+          Don&#39t have an account?{" "}
           <a href="/registration" className="underline hover:text-[#3c2e23] transition">Register</a>
         </p>
 
         <p className="text-center text-[#5c4433] text-sm mt-2">
-          <a href="/" className="hover:underline">← Go to Home</a>
+          {/* <a href="/" className="hover:underline">← Go to Home</a> */}
+          <Link href={"/"}className="hover:underline">← Go to Home</Link>
         </p>
       </div>
     </div>

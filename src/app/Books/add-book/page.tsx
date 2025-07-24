@@ -1,10 +1,9 @@
 "use client"
 
 import api from "@/api";
-import { BookType } from "@/types/bookType";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { title } from "process";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from 'yup'
@@ -20,6 +19,7 @@ const schema = yup.object().shape({
   description: yup.string().required('Description is required'),
   image: yup
     .mixed()
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     .test('fileType', 'Unsupported file format', (value: any) => {
         return value && value[0] && ['image/jpeg', 'image/png', 'image/webp'].includes(value[0].type)})
     .required('Image is required') as yup.Schema<FileList>
@@ -70,6 +70,7 @@ const AddBook = ()=> {
             reset();
             setPreview(null);
             router.push('/books')
+            console.log(res)
             
         } catch (error) {
             console.error('Upload failed:', error);
@@ -176,11 +177,18 @@ const AddBook = ()=> {
             {preview && (
             <div className="mt-4">
                 <p className="text-sm text-[#6e5842] mb-1">Image Preview:</p>
-                <img
+                <Image
+                    src={preview}
+                    alt="Preview"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-md"
+                />
+                {/* <img
                 src={preview}
                 alt="Preview"
                 className="h-40 object-cover rounded-md border border-[#cbbfa7] shadow"
-                />
+                /> */}
             </div>
             )}
 

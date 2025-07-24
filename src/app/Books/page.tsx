@@ -2,13 +2,12 @@
 
 import api from "@/api";
 import { BookType } from "@/types/bookType";
-import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BookList = () => {
   const [books, setBooks] = useState<BookType[]>([]);
-  const searchParams = useSearchParams();
-  const pageParam = searchParams.get('page');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalBooks, setTotalBooks] = useState(0);
   const router = useRouter();
@@ -32,7 +31,6 @@ const BookList = () => {
     <div
   className="min-h-screen bg-cover bg-center px-4 py-10 flex justify-center"
   style={{
-    // backgroundImage: `url('/images/img7.jpg')`,
     backgroundColor: "#99760398"
   }}
 >
@@ -48,11 +46,13 @@ const BookList = () => {
             key={book._id}
             className="backdrop-blur-md bg-white/20 shadow-xl rounded-2xl border border-white/30 overflow-hidden flex flex-col transition hover:shadow-2xl"
           >
-            <div className="h-48 bg-white/30 flex items-center justify-center p-3">
-              <img
+            <div className="h-48 bg-white/30 flex items-center justify-center p-3 relative">
+              <Image
                 src={imageUrl}
                 alt={book.title}
-                className="max-h-full object-contain rounded-md"
+                fill
+                className="object-contain rounded-md"
+                unoptimized 
               />
             </div>
 

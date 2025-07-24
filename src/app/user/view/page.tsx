@@ -4,6 +4,7 @@ import api from "@/api";
 import { UserType } from "@/types/userType";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const ViewProfile = () => {
   const [user, setUser] = useState<UserType | null>(null);
@@ -24,8 +25,8 @@ const ViewProfile = () => {
           setUser(res.data.data);
         })
         .catch((err) => console.error(err));
-    } catch (e) {
-      console.error("Invalid user data in localstorage");
+    } catch (err) {
+      console.error("Invalid user data in localstorage",err);
     }
   }, []);
 
@@ -44,15 +45,19 @@ const ViewProfile = () => {
 >
   <div className="bg-white/40 backdrop-blur-md border border-white/30 shadow-xl rounded-3xl p-8 w-full max-w-lg">
     <div className="flex flex-col items-center gap-3">
-      <img
-        src={
-          user.image
-            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.image.replace(/\\/g, "/")}`
-            : "/images/banner4.jpeg"
-        }
-        alt={user.name}
-        className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
-      />
+      <div className="w-28 h-28 relative rounded-full border-4 border-white shadow-lg overflow-hidden">
+        <Image
+          src={
+            user.image
+              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.image.replace(/\\/g, "/")}`
+              : "/images/banner4.jpeg"
+          }
+          alt={user.name}
+          fill
+          className="object-cover rounded-full"
+          unoptimized
+        />
+      </div>
       <h2 className="text-3xl font-bold text-[#4e342e]">{user.name}</h2>
       <span className="text-sm text-[#6d4c41] capitalize tracking-wide">
         {user.role}

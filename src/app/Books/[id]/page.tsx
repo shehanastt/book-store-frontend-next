@@ -4,6 +4,7 @@ import api from "@/api";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import { BookType } from "@/types/bookType";
 import { Button } from "@mui/material";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -67,11 +68,13 @@ const ViewBook = () => {
     style={{backgroundImage: "url(/images/img4.jpg)"}}>
       <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden md:flex transition duration-300">
         {/* Image */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6 bg-white/5">
-          <img
+        <div className="w-full md:w-1/2 flex items-center justify-center p-6 bg-white/5 relative h-80">
+          <Image
             src={imageUrl}
             alt={book.title}
-            className="w-full h-auto max-h-80 object-contain rounded-lg shadow"
+            fill
+            className="object-contain rounded-lg shadow"
+            unoptimized
           />
         </div>
 

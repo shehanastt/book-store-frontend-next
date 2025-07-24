@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { useState } from "react"
+import Link from "next/link"
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -57,7 +58,6 @@ const Registration = () => {
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
 
-      // Set the cookie manually
       document.cookie = `token=${token}; path=/; max-age=86400; SameSite=Lax`;
       document.cookie = `token=${token}; path=/; max-age=86400; SameSite=Lax`;
 
@@ -70,6 +70,7 @@ const Registration = () => {
       } else {
         router.push('/')
       }
+      //eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err)
       alert(err?.response?.data?.message || 'Registration failed')
@@ -181,7 +182,8 @@ const Registration = () => {
         </p>
 
         <p className="text-center text-[#5c4433] text-sm mt-2">
-          <a href="/" className="hover:underline">← Go to Home</a>
+          {/* <a href="/" className="hover:underline">← Go to Home</a> */}
+          <Link href={"/"}className="hover:underline">← Go to Home</Link>
         </p>
       </div>
     </div>
