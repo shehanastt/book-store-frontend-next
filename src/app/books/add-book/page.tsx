@@ -175,11 +175,12 @@ const AddBook = ()=> {
             </div>
 
             {preview && (
-            <div className="mt-4 w-full max-w-xs h-48 rounded-lg overflow-hidden shadow-md border border-gray-300 bg-transparent">
-                <img
+            <div className="mt-4 w-full max-w-xs h-48 relative rounded-lg overflow-hidden shadow-md border border-gray-300 bg-transparent">
+                <Image
                 src={preview}
                 alt="Preview"
-                className="w-full h-full object-contain p-2"
+                fill
+                className="object-contain p-2"
                 />
             </div>
             )}
